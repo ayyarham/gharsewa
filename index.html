@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GharSewa — Trusted Home Services in Kathmandu & Lalitpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10211f;
+    --ink-soft:#3c4c4a;
+    --teal:#0f6e63;
+    --teal-deep:#0a4f47;
+    --teal-tint:#e7f1ef;
+    --saffron:#f4a318;
+    --saffron-deep:#e08800;
+    --paper:#fbfaf6;
+    --card:#ffffff;
+    --line:#e6e3da;
+    --whatsapp:#25d366;
+    --radius:18px;
+    --shadow:0 10px 40px -12px rgba(16,33,31,.18);
+    --shadow-sm:0 4px 18px -8px rgba(16,33,31,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05;letter-spacing:-.02em}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+  a{text-decoration:none;color:inherit}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,250,246,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:9px;font-family:'Bricolage Grotesque';font-weight:700;font-size:1.32rem}
+  .logo .dot{width:30px;height:30px;border-radius:9px;background:var(--teal);display:grid;place-items:center;color:#fff;font-size:1rem}
+  .logo span b{color:var(--teal)}
+  .nav-cta{
+    background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;
+    font-weight:600;font-size:.92rem;transition:.2s;
+  }
+  .nav-cta:hover{background:var(--teal)}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-weight:700;font-size:1.05rem;border:none;cursor:pointer;
+    padding:16px 30px;border-radius:999px;transition:transform .15s,box-shadow .2s;
+    font-family:'Manrope';
+  }
+  .btn-primary{background:var(--saffron);color:#1a1200;box-shadow:0 8px 22px -8px rgba(224,136,0,.7)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(224,136,0,.85)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:64px 0 56px}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(900px 420px at 82% -8%,var(--teal-tint),transparent 60%),
+      radial-gradient(620px 360px at 6% 18%,rgba(244,163,24,.10),transparent 60%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    padding:7px 15px;border-radius:999px;font-size:.82rem;font-weight:600;color:var(--teal-deep);margin-bottom:22px;
+  }
+  .eyebrow .pin{width:7px;height:7px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 4px rgba(244,163,24,.22)}
+  .hero h1{font-size:clamp(2.5rem,5.2vw,3.9rem);font-weight:800}
+  .hero h1 em{font-style:normal;color:var(--teal);position:relative}
+  .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:11px;background:rgba(244,163,24,.4);z-index:-1;border-radius:3px}
+  .hero p.sub{font-size:1.18rem;color:var(--ink-soft);margin:22px 0 0;max-width:520px}
+  .pillars{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}
+  .pillar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:9px 15px;border-radius:12px;font-weight:600;font-size:.92rem;box-shadow:var(--shadow-sm)}
+  .pillar svg{width:18px;height:18px;color:var(--teal);flex-shrink:0}
+  .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .rating{display:flex;align-items:center;gap:10px;margin-top:24px;font-size:.92rem;color:var(--ink-soft)}
+  .stars{color:var(--saffron);letter-spacing:2px}
+
+  /* hero visual card */
+  .hero-card{
+    background:var(--card);border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--line);
+    padding:24px;position:relative;
+  }
+  .hero-card h4{font-family:'Manrope';font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px}
+  .pro-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-top:1px solid var(--line)}
+  .pro-row:first-of-type{border-top:none}
+  .avatar{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-weight:700;color:#fff;font-family:'Bricolage Grotesque';flex-shrink:0}
+  .pro-row .meta{flex:1}
+  .pro-row .meta b{display:block;font-size:.97rem}
+  .pro-row .meta small{color:var(--ink-soft);font-size:.82rem}
+  .verified{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 9px;border-radius:999px}
+  .floaty{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:10px 14px;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:8px}
+  .floaty.one{top:-18px;right:-14px;color:var(--teal-deep)}
+  .floaty.two{bottom:-18px;left:-14px;color:var(--saffron-deep)}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:78px 0}
+  .head{max-width:640px;margin-bottom:46px}
+  .head .tag{font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--saffron-deep)}
+  .head h2{font-size:clamp(2rem,4vw,2.7rem);font-weight:800;margin-top:10px}
+  .head p{color:var(--ink-soft);font-size:1.1rem;margin-top:12px}
+
+  /* ---------- SERVICE GRID ---------- */
+  #services{background:linear-gradient(180deg,#fff,var(--paper))}
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .svc{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;
+  }
+  .svc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .svc .ic{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;margin-bottom:16px;font-size:1.6rem}
+  .svc h3{font-size:1.32rem;font-weight:700}
+  .svc .from{color:var(--ink-soft);font-size:.9rem;margin:4px 0 16px}
+  .svc .from b{color:var(--teal);font-size:1rem}
+  .price-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px dashed var(--line);font-size:.95rem}
+  .price-row span{color:var(--ink-soft)}
+  .price-row b{font-family:'Bricolage Grotesque';font-weight:700;color:var(--ink)}
+  .svc .fixed-tag{position:absolute;top:18px;right:18px;font-size:.68rem;font-weight:700;color:var(--teal-deep);background:var(--teal-tint);padding:5px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+  .price-note{text-align:center;margin-top:26px;color:var(--ink-soft);font-size:.92rem}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;position:relative}
+  .step .num{font-family:'Bricolage Grotesque';font-weight:800;font-size:2.4rem;color:var(--teal-tint);position:absolute;top:18px;right:22px}
+  .step .badge{width:48px;height:48px;border-radius:13px;background:var(--teal);color:#fff;display:grid;place-items:center;margin-bottom:18px;font-size:1.4rem}
+  .step h3{font-size:1.22rem;font-weight:700;margin-bottom:8px}
+  .step p{color:var(--ink-soft);font-size:.97rem}
+  .pay-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .pay-chips span{font-size:.78rem;font-weight:700;background:var(--paper);border:1px solid var(--line);padding:5px 11px;border-radius:8px}
+
+  /* ---------- TRUST BANNER ---------- */
+  .trust{background:var(--teal-deep);color:#fff;border-radius:28px;padding:54px 44px;position:relative;overflow:hidden}
+  .trust::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 88% 0%,rgba(244,163,24,.18),transparent 60%)}
+  .trust-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .trust h2{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:800}
+  .trust p{color:rgba(255,255,255,.82);font-size:1.08rem;margin-top:14px}
+  .trust-list{display:grid;gap:14px}
+  .trust-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
+  .trust-item .shield{width:40px;height:40px;border-radius:11px;background:var(--saffron);color:#1a1200;display:grid;place-items:center;flex-shrink:0;font-size:1.15rem}
+  .trust-item b{display:block;font-size:1rem}
+  .trust-item small{color:rgba(255,255,255,.75);font-size:.88rem}
+
+  /* ---------- BOOKING FORM ---------- */
+  #book{background:linear-gradient(180deg,var(--paper),#fff)}
+  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+  .book-copy h2{font-size:clamp(2rem,4vw,2.7rem);font-weight:800}
+  .book-copy p{color:var(--ink-soft);font-size:1.1rem;margin-top:14px}
+  .book-points{margin-top:24px;display:grid;gap:13px}
+  .book-points li{list-style:none;display:flex;gap:11px;align-items:center;font-weight:600}
+  .book-points svg{width:20px;height:20px;color:var(--teal);flex-shrink:0}
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:32px}
+  .form-card h3{font-size:1.35rem;font-weight:700;margin-bottom:4px}
+  .form-card .lead{color:var(--ink-soft);font-size:.95rem;margin-bottom:22px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
+  .field label .req{color:var(--saffron-deep)}
+  .field input,.field select{
+    width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;
+    font-family:'Manrope';font-size:1rem;background:var(--paper);transition:.15s;color:var(--ink);
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px var(--teal-tint)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-card .submit{width:100%;justify-content:center;margin-top:8px;background:var(--whatsapp);color:#fff;box-shadow:0 8px 22px -8px rgba(37,211,102,.7)}
+  .form-card .submit svg{width:22px;height:22px;flex-shrink:0}
+  .form-card .submit:hover{transform:translateY(-2px)}
+  .form-foot{text-align:center;font-size:.82rem;color:var(--ink-soft);margin-top:14px}
+  .err{font-size:.8rem;color:#c0392b;margin-top:5px;display:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:46px 0 30px;margin-top:20px}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:center}
+  footer .logo{color:#fff}
+  footer .logo span b{color:var(--saffron)}
+  .foot-grid p{font-size:.9rem;max-width:380px}
+  .foot-contacts{display:flex;gap:22px;font-weight:600;font-size:.92rem}
+  .foot-contacts a:hover{color:#fff}
+  .copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:20px;font-size:.82rem}
+
+  /* ---------- FLOATING SUPPORT ---------- */
+  .float-wrap{position:fixed;right:20px;bottom:22px;z-index:80;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+  .float-btn{
+    display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;
+    font-weight:700;font-size:.98rem;color:#fff;box-shadow:0 10px 30px -8px rgba(0,0,0,.35);
+    transition:transform .18s;
+  }
+  .float-btn:hover{transform:translateY(-3px) scale(1.02)}
+  .float-btn svg{width:22px;height:22px}
+  .fb-wa{background:var(--whatsapp)}
+  .fb-call{background:var(--ink)}
+  .fb-call .lbl,.fb-wa .lbl{white-space:nowrap}
+  .pulse{position:relative}
+  .pulse::after{content:"";position:absolute;inset:0;border-radius:999px;background:var(--whatsapp);z-index:-1;animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.6}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero-card{order:2}
+    .book-grid{grid-template-columns:1fr;gap:34px}
+    .trust-inner{grid-template-columns:1fr;gap:28px}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .svc-grid{grid-template-columns:1fr}
+    .two-col{grid-template-columns:1fr}
+    .nav-cta{display:none}
+    section.block{padding:56px 0}
+    .trust{padding:38px 24px}
+    .float-btn .lbl{display:none}
+    .float-btn{padding:15px}
+    .hero h1{font-size:2.3rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="dot">घ</span><span>Ghar<b>Sewa</b></span></div>
+    <a href="#book" class="nav-cta">Book a Service</a>
+  </div>
+</header>
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-left reveal">
+      <span class="eyebrow"><span class="pin"></span> Now serving Kathmandu &amp; Lalitpur</span>
+      <h1>Home repairs &amp; cleaning, <em>done right</em> the first time.</h1>
+      <p class="sub">Book trusted, verified professionals for your home in minutes — no haggling, no guesswork.</p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          Fixed Pricing
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          Police-Verified Pros
+        </div>
+        <div class="pillar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg>
+          Standardized Quality
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#book" class="btn btn-primary">
+          Book a Service
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#services" class="btn btn-ghost">View Prices</a>
+      </div>
+
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span>Rated <b>4.9/5</b> by early Kathmandu households</span>
+      </div>
+    </div>
+
+    <div class="hero-card reveal">
+      <div class="floaty one">✓ KYC Verified</div>
+      <div class="floaty two">⚡ Arrives in 60 min</div>
+      <h4>Your matched professionals</h4>
+      <div class="pro-row">
+        <div class="avatar" style="background:#0f6e63">RT</div>
+        <div class="meta"><b>Waqar M.</b><small>Electrician · 6 yrs exp · Baneshwor</small></div>
+        <span class="verified">● Verified</span>
+      </div>
+      <div class="pro-row">
+        <div class="avatar" style="background:#e08800">SM</div>
+        <div class="meta"><b>Nishant T.</b><small>Deep Cleaning Lead · Lalitpur</small></div>
+        <span class="verified">● Verified</span>
+      </div>
+      <div class="pro-row">
+        <div class="avatar" style="background:#3c4c4a">BG</div>
+        <div class="meta"><b>Rishab B.</b><small>Plumber · 8 yrs exp · Kalanki</small></div>
+        <span class="verified">● Verified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. SERVICE MENU ============ -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="tag">Transparent Pricing</span>
+      <h2>One fixed price. No bargaining.</h2>
+      <p>You see the exact rate before you book. The price we quote is the price you pay.</p>
+    </div>
+
+    <div class="svc-grid">
+      <!-- Deep Cleaning -->
+      <div class="svc reveal">
+        <span class="fixed-tag">Fixed</span>
+        <div class="ic" style="background:var(--teal-tint)">🧽</div>
+        <h3>Deep Cleaning</h3>
+        <p class="from">Starting from <b>NPR 999</b></p>
+        <div class="price-row"><span>Bathroom Deep Clean</span><b>NPR 999</b></div>
+        <div class="price-row"><span>Kitchen Deep Clean</span><b>NPR 1,299</b></div>
+        <div class="price-row"><span>1 BHK Full Home</span><b>NPR 2,499</b></div>
+        <div class="price-row"><span>2 BHK Full Home</span><b>NPR 3,799</b></div>
+      </div>
+
+      <!-- Electrical -->
+      <div class="svc reveal">
+        <span class="fixed-tag">Fixed</span>
+        <div class="ic" style="background:#fdf0d6">💡</div>
+        <h3>Electrical Work</h3>
+        <p class="from">Starting from <b>NPR 399</b></p>
+        <div class="price-row"><span>Switch / Socket Repair</span><b>NPR 399</b></div>
+        <div class="price-row"><span>Light / Tubelight Fitting</span><b>NPR 449</b></div>
+        <div class="price-row"><span>Fan Install or Repair</span><b>NPR 599</b></div>
+        <div class="price-row"><span>Full Wiring Inspection</span><b>NPR 899</b></div>
+      </div>
+
+      <!-- Plumbing -->
+      <div class="svc reveal">
+        <span class="fixed-tag">Fixed</span>
+        <div class="ic" style="background:var(--teal-tint)">🔧</div>
+        <h3>Plumbing</h3>
+        <p class="from">Starting from <b>NPR 449</b></p>
+        <div class="price-row"><span>Tap / Faucet Repair</span><b>NPR 449</b></div>
+        <div class="price-row"><span>Toilet / Flush Repair</span><b>NPR 599</b></div>
+        <div class="price-row"><span>Pipe Leakage Fix</span><b>NPR 699</b></div>
+        <div class="price-row"><span>Drain Unclogging</span><b>NPR 799</b></div>
+      </div>
+
+      <!-- Appliance Repair -->
+      <div class="svc reveal">
+        <span class="fixed-tag">Fixed</span>
+        <div class="ic" style="background:#fdf0d6">🛠️</div>
+        <h3>Appliance Repair</h3>
+        <p class="from">Starting from <b>NPR 749</b></p>
+        <div class="price-row"><span>Geyser / Water Heater</span><b>NPR 749</b></div>
+        <div class="price-row"><span>Washing Machine Repair</span><b>NPR 899</b></div>
+        <div class="price-row"><span>Refrigerator Repair</span><b>NPR 999</b></div>
+        <div class="price-row"><span>AC Service &amp; Cleaning</span><b>NPR 1,299</b></div>
+      </div>
+    </div>
+    <p class="price-note">Prices include the professional's visit. Spare parts, if needed, are charged at MRP and shown to you before any work begins.</p>
+  </div>
+</section>
+
+<!-- ============ 3. HOW IT WORKS ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="tag">How It Works</span>
+      <h2>Three simple steps.</h2>
+      <p>From booking to a job well done — usually within the same day.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <div class="badge">📅</div>
+        <h3>Choose &amp; schedule</h3>
+        <p>Pick the service you need and select a time slot that suits you — morning, afternoon or evening.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <div class="badge">👷</div>
+        <h3>Get matched</h3>
+        <p>We assign a verified local professional near you and share their name and details before they arrive.</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <div class="badge">✅</div>
+        <h3>Job done — pay easily</h3>
+        <p>Your work is completed to standard. Pay whichever way is easiest for you.</p>
+        <div class="pay-chips">
+          <span>💵 Cash</span><span>eSewa</span><span>Khalti</span><span>Fonepay</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. TRUST & SAFETY ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="trust reveal">
+      <div class="trust-inner">
+        <div>
+          <h2>Every professional is verified — for your peace of mind.</h2>
+          <p>We don't just send anyone to your home. Each GharSewa professional goes through strict verification before they ever take a job.</p>
+        </div>
+        <div class="trust-list">
+          <div class="trust-item">
+            <div class="shield">🪪</div>
+            <div><b>KYC-Registered with Nagarikta</b><small>Identity confirmed against citizenship documents.</small></div>
+          </div>
+          <div class="trust-item">
+            <div class="shield">🛡️</div>
+            <div><b>Police Background Checked</b><small>Cleared through a formal background verification.</small></div>
+          </div>
+          <div class="trust-item">
+            <div class="shield">🆔</div>
+            <div><b>Carries a Company ID</b><small>Ask to see their GharSewa ID card at your door.</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. BOOKING FORM ============ -->
+<section class="block" id="book">
+  <div class="wrap book-grid">
+    <div class="book-copy reveal">
+      <h2>Book your service</h2>
+      <p>Fill this in and your booking lands straight in our team's WhatsApp. We confirm your slot within minutes.</p>
+      <ul class="book-points">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> No payment needed to book</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Same-day slots available</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Free to cancel before the pro is assigned</li>
+      </ul>
+    </div>
+
+    <div class="form-card reveal">
+      <h3>Request a booking</h3>
+      <p class="lead">Takes under a minute. We'll WhatsApp you to confirm.</p>
+
+      <div class="field">
+        <label>Full Name <span class="req">*</span></label>
+        <input type="text" id="f-name" placeholder="e.g. Anisha Shrestha">
+        <div class="err" id="e-name">Please enter your name.</div>
+      </div>
+
+      <div class="field">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="f-phone" placeholder="98XXXXXXXX" maxlength="10">
+        <div class="err" id="e-phone">Enter a valid 10-digit number.</div>
+      </div>
+
+      <div class="field">
+        <label>Service Needed <span class="req">*</span></label>
+        <select id="f-service">
+          <option value="">Select a service…</option>
+          <option>Deep Cleaning</option>
+          <option>Electrical Work</option>
+          <option>Plumbing</option>
+          <option>Appliance Repair</option>
+        </select>
+        <div class="err" id="e-service">Please choose a service.</div>
+      </div>
+
+      <div class="two-col">
+        <div class="field">
+          <label>Preferred Date <span class="req">*</span></label>
+          <input type="date" id="f-date">
+          <div class="err" id="e-date">Pick a date.</div>
+        </div>
+        <div class="field">
+          <label>Time Slot <span class="req">*</span></label>
+          <select id="f-time">
+            <option value="">Select…</option>
+            <option>Morning (8am–12pm)</option>
+            <option>Afternoon (12pm–4pm)</option>
+            <option>Evening (4pm–8pm)</option>
+          </select>
+          <div class="err" id="e-time">Pick a time slot.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Location / Area <span class="req">*</span></label>
+        <input type="text" id="f-loc" placeholder="e.g. Baluwatar, Kathmandu">
+        <div class="err" id="e-loc">Tell us your area.</div>
+      </div>
+
+      <button class="btn submit" onclick="submitBooking()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.044z"/></svg>
+        Send Booking via WhatsApp
+      </button>
+      <p class="form-foot">🔒 Your details go only to our booking team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><span class="dot" style="background:var(--saffron);color:#1a1200">घ</span><span>Ghar<b>Sewa</b></span></div>
+        <p style="margin-top:12px">Trusted, verified home services for Kathmandu &amp; Lalitpur. Fixed prices. Quality guaranteed.</p>
+      </div>
+      <div class="foot-contacts">
+        <a href="tel:+9779824556800">📞 +977 9824556800</a>
+        <a href="#book">📅 Book Now</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 GharSewa. All rights reserved. · Made in Nepal 🇳🇵</div>
+  </div>
+</footer>
+
+<!-- ============ 6. FLOATING SUPPORT ============ -->
+<div class="float-wrap">
+  <a class="float-btn fb-call" href="tel:+9779824556800">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+    <span class="lbl">Call Support</span>
+  </a>
+  <a class="float-btn fb-wa pulse" id="wa-float" href="#" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.044zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+    <span class="lbl">Chat on WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  // ====== CONFIG — change these two values to go live ======
+  const WHATSAPP_NUMBER = "9779824556800"; // your number, no + or spaces
+  const BUSINESS_NAME = "GharSewa";
+
+  // Wire up the floating WhatsApp button
+  document.getElementById('wa-float').href =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+    encodeURIComponent(`Hi ${BUSINESS_NAME}! I'd like to know more about your home services.`);
+
+  // Set min date on the form to today
+  document.getElementById('f-date').min = new Date().toISOString().split('T')[0];
+
+  function show(id, on){ document.getElementById(id).style.display = on ? 'block':'none'; }
+
+  function submitBooking(){
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const service = document.getElementById('f-service').value;
+    const date = document.getElementById('f-date').value;
+    const time = document.getElementById('f-time').value;
+    const loc = document.getElementById('f-loc').value.trim();
+
+    let ok = true;
+    show('e-name', !name); if(!name) ok=false;
+    const phoneOk = /^[0-9]{10}$/.test(phone);
+    show('e-phone', !phoneOk); if(!phoneOk) ok=false;
+    show('e-service', !service); if(!service) ok=false;
+    show('e-date', !date); if(!date) ok=false;
+    show('e-time', !time); if(!time) ok=false;
+    show('e-loc', !loc); if(!loc) ok=false;
+    if(!ok) return;
+
+    // Build a clean, pre-filled WhatsApp message — lands in your team's inbox
+    const msg =
+`🛎️ *New Booking Request — ${BUSINESS_NAME}*
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+🧰 Service: ${service}
+📅 Date: ${date}
+⏰ Slot: ${time}
+📍 Location: ${loc}
+
+Please confirm my booking. Thank you!`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    el.style.transitionDelay = (i%4*70)+'ms';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
